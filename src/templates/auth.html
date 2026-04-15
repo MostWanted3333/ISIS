@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход / Регистрация</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 1100px;
+            max-width: calc(100% - 40px);
+            margin: 0 auto;
+        }
+
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-inner {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .nav {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: #2563eb;
+        }
+
+        .page {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .auth-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+        }
+
+        .info-card h1 {
+            margin: 0 0 18px;
+            font-size: 40px;
+            line-height: 1.15;
+        }
+
+        .info-card p {
+            margin: 0 0 28px;
+            font-size: 17px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .info-points {
+            display: grid;
+            gap: 16px;
+        }
+
+        .info-point {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .info-point-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .info-point-text {
+            font-size: 14px;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 24px;
+            padding: 34px 30px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        .tabs {
+            display: flex;
+            background: #eef2ff;
+            border-radius: 14px;
+            padding: 6px;
+            margin-bottom: 28px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .tab.active {
+            background: #ffffff;
+            color: #2563eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-title {
+            margin: 0 0 8px;
+            font-size: 28px;
+            color: #111827;
+        }
+
+        .form-subtitle {
+            margin: 0 0 24px;
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 4px;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .bottom-text {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .bottom-text a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .bottom-text a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            margin: 28px 0 22px;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .login-mini {
+            margin-top: 8px;
+        }
+
+        .login-mini h3 {
+            margin: 0 0 8px;
+            font-size: 20px;
+            color: #111827;
+        }
+
+        .login-mini p {
+            margin: 0 0 16px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .login-link {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 13px 14px;
+            border-radius: 12px;
+            border: 1px solid #c7d2fe;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            background: #f8fbff;
+        }
+
+        .login-link:hover {
+            background: #eef4ff;
+        }
+
+        @media (max-width: 900px) {
+            .auth-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .info-card h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                max-width: calc(100% - 24px);
+            }
+
+            .header-inner {
+                height: auto;
+                padding: 16px 0;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .auth-card,
+            .info-card {
+                padding: 24px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">AI Prep</div>
+            <nav class="nav">
+                <a href="/">Главная</a>
+                <a href="/auth">Вход</a>
+                <a href="/dashboard">Личный кабинет</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="container auth-layout">
+            <section class="info-card">
+                <h1>Создай аккаунт и начни подготовку</h1>
+                <p>
+                    Зарегистрируйся в системе, чтобы загружать резюме, добавлять вакансии,
+                    проходить пробные интервью и получать персональные рекомендации.
+                </p>
+
+                <div class="info-points">
+                    <div class="info-point">
+                        <div class="info-point-title">Загрузка резюме</div>
+                        <div class="info-point-text">
+                            Храни и используй данные резюме для персональной подготовки.
+                        </div>
+                    </div>
+
+                    <div class="info-point">
+                        <div class="info-point-title">Анализ вакансий</div>
+                        <div class="info-point-text">
+                            Добавляй интересующие вакансии и готовься под конкретные требования.
+                        </div>
+                    </div>
+
+                    <div class="info-point">
+                        <div class="info-point-title">AI-интервью</div>
+                        <div class="info-point-text">
+                            Проходи симуляции интервью и отслеживай результаты в личном кабинете.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="auth-card">
+                <div class="tabs">
+                    <div class="tab active">Регистрация</div>
+                    <div class="tab">Вход</div>
+                </div>
+
+                <h2 class="form-title">Создать аккаунт</h2>
+                <p class="form-subtitle">
+                    Заполни основные данные, чтобы получить доступ ко всем функциям платформы.
+                </p>
+
+                <form action="/register" method="post">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="full_name">Имя и фамилия</label>
+                            <input
+                                type="text"
+                                id="full_name"
+                                name="full_name"
+                                placeholder="Иван Иванов"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="target_position">Желаемая должность</label>
+                            <input
+                                type="text"
+                                id="target_position"
+                                name="target_position"
+                                placeholder="Python Developer"
+                            >
+                        </div>
+
+                        <div class="field full">
+                            <label for="email">Электронная почта</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="example@mail.com"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="password_hash">Пароль</label>
+                            <input
+                                type="password_hash"
+                                id="password_hash"
+                                name="password_hash"
+                                placeholder="Введите пароль"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="confirm_password">Повтор пароля</label>
+                            <input
+                                type="password"
+                                id="confirm_password"
+                                name="confirm_password"
+                                placeholder="Повторите пароль"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Создать аккаунт</button>
+                </form>
+
+                <div class="bottom-text">
+                    Уже есть аккаунт? <a href="/login">Перейти ко входу</a>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="login-mini">
+                    <h3>Уже зарегистрированы?</h3>
+                    <p>
+                        Перейди на страницу входа и открой доступ к своему личному кабинету.
+                    </p>
+                    <a class="login-link" href="/login">Открыть страницу входа</a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
