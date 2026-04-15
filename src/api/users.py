@@ -48,9 +48,6 @@ async def add_user(
 
 
 
-@router.get("/users")
-async def get_book():
-    pass
 
 @router.get("/auth", response_class=HTMLResponse)
 async def get_auth_page(request: Request):
