@@ -2,7 +2,10 @@
 from fastapi import APIRouter, Request,Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+<<<<<<< HEAD
 from src.bitrix_service import create_bitrix_lead
+=======
+>>>>>>> 90aa250841bc0bd69255139cf449a0a7df95bf24
 from src.database import engine,Base
 from src.api.dependenceis import SessionDep
 from datetime import datetime
